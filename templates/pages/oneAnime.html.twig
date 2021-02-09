@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <div class="container mt-3 mb-3">
+        <h1 class="mb-3">{{anime.aniName}}</h1>
+        <div class="row">
+            <div class="col-4">
+                <img class="card-img-top" src="https://{{anime.aniImage}}" alt="Card image cap">
+            </div>
+            <div class="col-8">
+                <p>Premier jour de parution : {{anime.aniStart|date('d.m.y')}}</p>
+                <p>Episode : {{anime.aniCurrentNB}} / {{anime.aniFullNB}}</p>
+                <p>Streaming : <a href="https://{{anime.aniLink}}">Wakanim</a></p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
