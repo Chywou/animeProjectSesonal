@@ -9,8 +9,15 @@
             </div>
             <div class="col-8">
                 <p>Premier jour de parution : {{anime.aniStart|date('d.m.y')}}</p>
+                <p>Prochaine épisode à {{anime.aniHour|date('H:i')}} {{anime.day.dayName}}</p>
                 <p>Episode : {{anime.aniCurrentNB}} / {{anime.aniFullNB}}</p>
+                <!--
+                {{form_start(form)}}
+                    {{form_widget(form)}}
+                {{form_end(form)}} -->
+
                 <p>Streaming : <a href="https://{{anime.aniLink}}">Wakanim</a></p>
+
             </div>
         </div>
     </div>

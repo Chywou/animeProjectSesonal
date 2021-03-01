@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\ModifyNBType;
 use App\Repository\AnimeRepository;
 use App\Repository\DayRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -31,6 +32,7 @@ class HomeController extends AbstractController
     public function oneAnime($id): Response
     {
         $anime = $this->animes->find($id);
-        return $this->render('pages/oneAnime.html.twig', ['anime' => $anime]);
+        $form = $this->createForm(ModifyNBType::class, $anime);
+        return $this->render('pages/oneAnime.html.twig', ['anime' => $anime, 'form' => $form->createView()]);
     }
 }
