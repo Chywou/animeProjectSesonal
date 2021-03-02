@@ -12,7 +12,7 @@ class ModifyNBType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('aniCurrentNB', null, ['label' => ''])
+            ->add('aniCurrentNB', null, ['label' => ' '])
         ;
     }
 

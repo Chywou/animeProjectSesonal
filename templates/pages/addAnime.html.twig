@@ -1,0 +1,25 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+<div class="container mt-3 mb-3">
+    <h2 class="mb-3">Ajouter un anime</h2>
+    {{form_start(form)}}
+        <div>{{form_row(form.aniName)}}</div>
+        <div class="row">
+            <div class="col-3">{{form_row(form.aniFullNB)}}</div>
+            <div class="col-3">{{form_row(form.aniCurrentNB)}}</div>
+            <div class="col-2 ">{{form_row(form.day)}}</div>
+            <div class="col-2 ">{{form_row(form.aniDelay)}}</div>
+        </div>
+        <div class="row">
+
+            <div class="col-2 ">{{form_row(form.aniHour)}}</div>
+            <div class="col-3">{{form_row(form.aniStart)}}</div>
+        </div>
+        <div class="row">
+        </div>
+            {{form_widget(form)}}
+            <button class="btn btn-primary">Ajouter</button>
+    {{form_end(form)}} 
+</div>
+{% endblock %}
