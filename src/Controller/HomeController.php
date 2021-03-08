@@ -27,7 +27,7 @@ class HomeController extends AbstractController
      */
     public function index(): Response
     {
-        $allDays = $this->days->findAll();
+        $allDays = $this->days->findAllORder();
         return $this->render('pages/home.html.twig', ['allDays' => $allDays]);
     }
 

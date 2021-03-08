@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\AnimeRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -19,21 +20,26 @@ class Anime
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $aniName;
 
     /**
      * @ORM\Column(type="integer", options={"default" : 0})
+     * @Assert\LessThanOrEqual(propertyPath = "aniFullNB")
+     * @Assert\Positive
      */
     private $aniCurrentNB;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Positive
      */
     private $aniFullNB;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $aniLink;
 
@@ -49,11 +55,13 @@ class Anime
 
     /**
      * @ORM\Column(type="integer", options={"default" : 0})
+     * @Assert\PositiveOrZero
      */
     private $aniDelay;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $aniImage;
 

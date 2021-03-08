@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Anime;
 use App\Entity\Day;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -17,6 +18,18 @@ class DayRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Day::class);
+    }
+
+    public function findAllORder()
+    {
+        return $this->createQueryBuilder('d')
+            ->addSelect('a')
+            ->leftJoin('d.animes', 'a')
+            ->orderBy('a.aniHour', 'ASC')
+            ->orderBy('d.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
     }
 
     // /**
