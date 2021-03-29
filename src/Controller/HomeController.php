@@ -50,7 +50,7 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("/{aniName}{id}", name="oneAnime")
+     * @Route("/anime:{aniName}{id}", name="oneAnime")
      */
     public function oneAnime($id, Request $request): Response
     {

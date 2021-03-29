@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Day;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,5 +21,14 @@ class AProposController extends AbstractController
         $em->flush();*/
 
         return $this->render('pages/aPropos.html.twig');
+    }
+
+
+    /**
+     * @Route("/Connecté", name="connected")
+     */
+    public function connected(): Response
+    {
+        return $this->render('pages/connected.html.twig');
     }
 }
