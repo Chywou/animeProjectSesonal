@@ -1,7 +1,7 @@
 {% extends "base.html.twig" %}
 {% block title %}{{anime.aniName}}{% endblock %}
 {% block body %}
-    <div class="mt-3 mb-3">
+    <div class="mt-3 mb-3 p-5">
         <h1 class="mb-3">{{anime.aniName}}</h1>
         <div class="row">
             <div class="col-4">
@@ -11,11 +11,14 @@
                 <p>Premier jour de parution : {{anime.aniStart|date('d.m.y')}}</p>
                 <p>Prochaine épisode à {{anime.aniHour|date('H:i')}} {{anime.day.dayName}}</p>
                 <p>Episode : {{anime.aniCurrentNB}} / {{anime.aniFullNB}}</p>
-                
-                {{form_start(form)}}
-                    {{form_widget(form)}}
-                    <button class="btn btn-primary">Editer</button>
-                {{form_end(form)}} 
+                    {{form_start(form)}}
+                    <div class="row">
+                        <div class="col-3 d-flex align-items-center">{{form_widget(form)}}</div>
+                        <div class="col-3 d-flex align-items-center mt-2">
+                        <button class="btn btn-primary">Editer</button>
+                        </div>
+                    </div>
+                    {{form_end(form)}} 
 
                 <p>Streaming : <a href="https://{{anime.aniLink}}">Wakanim</a></p>
 

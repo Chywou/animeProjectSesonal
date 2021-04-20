@@ -15,7 +15,7 @@
                         <img class="card-img-top" src="https://{{anime.aniImage}}" alt="Card image cap">
                         <div class="card-body p-2">
                             <h5 class="card-title">
-                                <a href="{{ path('oneAnime', {id: anime.id, aniName: anime.aniName}) }}" >{{anime.aniName}}</a>
+                                <a class="text-decoration-none" href="{{ path('oneAnime', {id: anime.id, aniName: anime.aniName}) }}" >{{anime.aniName}}</a>
                             </h5>
                             <p class="card-text">{{anime.aniHour|date('H:i')}}<br>épisode {{anime.aniCurrentNB}}/{{anime.aniFullNB}}</p>
                         </div>
