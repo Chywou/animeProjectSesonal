@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\SearchType;
 use App\Repository\AnimeRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Knp\Component\Pager\PaginatorInterface;
@@ -44,8 +45,18 @@ class OtherController extends AbstractController
      */
     public function allAnime(Request $request, PaginatorInterface $paginator): Response
     {
-        $datas = $this->animes->findall();
-        $allAnimes = $paginator->paginate($datas, $request->query->getInt('page', 1), 4);
-        return $this->render('pages/allAnime.html.twig', ['allAnimes' => $allAnimes]);
+        $search='';
+        $form = $this->createForm(SearchType::class);
+        $form->handleRequest($request);
+        if (isset($form->getData()['animeName']))
+        {
+            $search = $form->getData()['animeName'];
+        }
+        $datas = $this->animes->findAllSearch($search);
+        $allAnimes = $paginator->paginate($datas, $request->query->getInt('page', 1), 8);
+        return $this->render('pages/allAnime.html.twig', [
+            'allAnimes' => $allAnimes,
+            'form' => $form->createView()
+            ]);
     }
 }

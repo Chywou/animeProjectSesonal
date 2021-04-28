@@ -25,8 +25,8 @@ class DayRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('d')
             ->addSelect('a')
             ->leftJoin('d.animes', 'a')
-            ->orderBy('a.aniHour', 'ASC')
-            ->orderBy('d.id', 'ASC')
+            ->addorderBy('d.id', 'ASC')
+            ->addorderBy('a.aniHour', 'ASC')
             ->getQuery()
             ->getResult()
         ;

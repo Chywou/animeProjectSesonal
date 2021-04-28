@@ -1,18 +1,44 @@
 {% extends "base.html.twig" %}
 {% block title %}OUIIIIIIIIii{% endblock %}
 {% block body %}
-<div class="text-center row m-0 mt-3">
+
+<div class ="row mt-5 px-5 d-flex align-items-center">
+    <div class="col-6">
+        <h1 class="fs-1 fw-light">Tout les animes !</h1>
+    </div>
+    <div class="col-6 d-flex align-items-end flex-column">
+        {{form_start(form)}}
+              <div class="btn-group" role="group">
+                <div>
+                    {{form_widget(form.animeName)}}
+                </div>
+                 <button type="submit" class="btn btn-secondary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-search" viewBox="0 0 auto auto">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                    </svg>
+                </button>
+            </div>
+        {{form_end(form)}}
+    </div>
+</div>
+<div class="text-center row m-0">
                 {% for anime in allAnimes %}
-                    <div class="card p-2 col-3">
-                        <img class="card-img-top" src="https://{{anime.aniImage}}" alt="Card image cap">
-                        <div class="card-body p-2">
+                    <div class="card col-3 px-5 py-3 border-0">
+                        <img class="card-img-top border border-bottom-0" src="{{anime.aniImage}}" alt="Card image cap">
+                        <div class="card-body border">
                             <h5 class="card-title">
-                                <a class="text-decoration-none" href="{{ path('oneAnime', {id: anime.id, aniName: anime.aniName}) }}" >{{anime.aniName}}</a>
+                                <a class="text-decoration-none" href="{{ path('oneAnime', {id: anime.id}) }}" >{{anime.aniName}}</a>
                             </h5>
                             <p class="card-text">{{anime.aniHour|date('H:i')}}<br>épisode {{anime.aniCurrentNB}}/{{anime.aniFullNB}}</p>
                         </div>
                     </div>
                 {% endfor %}
+                {% if allAnimes.count() == 0 %}
+                <h2 class="fw-light fs-1 mt-5 mb-3">0 résultat trouvé</h2>
+                <div class="text-center">
+                <img src="https://i.pinimg.com/236x/08/b1/94/08b194ea85dc92256a273faf21d73ae5--cat-art-minion.jpg" class="rounded" alt="...">
+                </div>
+                {% endif %}
 </div>
 <div class="navigation d-flex justify-content-center mt-3">
     {{ knp_pagination_render(allAnimes) }}

@@ -5,7 +5,7 @@
         <h1 class="mb-3">{{anime.aniName}}</h1>
         <div class="row">
             <div class="col-4">
-                <img class="card-img-top" src="https://{{anime.aniImage}}" alt="Card image cap">
+                <img class="card-img-top" src="{{anime.aniImage}}" alt="Card image cap">
             </div>
             <div class="col-8">
                 <p>Premier jour de parution : {{anime.aniStart|date('d.m.y')}}</p>
@@ -20,7 +20,7 @@
                     </div>
                     {{form_end(form)}} 
 
-                <p>Streaming : <a href="https://{{anime.aniLink}}">Wakanim</a></p>
+                <p>Streaming : <a href="{{anime.aniLink}}">Wakanim</a></p>
 
             </div>
         </div>

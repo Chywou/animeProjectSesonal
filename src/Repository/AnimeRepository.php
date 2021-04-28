@@ -19,6 +19,16 @@ class AnimeRepository extends ServiceEntityRepository
         parent::__construct($registry, Anime::class);
     }
 
+    public function findAllSearch($search)
+    {
+        $query = $this->createQueryBuilder('a')
+            ->where('a.aniName LIKE :search')
+            ->setParameter('search', '%'.$search.'%')
+        ;
+        return $query->getQuery()
+                    ->getResult();
+    }
+
     // /**
     //  * @return Anime[] Returns an array of Anime objects
     //  */
