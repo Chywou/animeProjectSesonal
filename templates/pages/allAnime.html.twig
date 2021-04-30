@@ -1,24 +1,46 @@
 {% extends "base.html.twig" %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+<link rel="stylesheet" href="{{ asset('stylesheet.css') }}">
+
+{% endblock %}
 {% block title %}OUIIIIIIIIii{% endblock %}
 {% block body %}
-
 <div class ="row mt-5 px-5 d-flex align-items-center">
     <div class="col-6">
         <h1 class="fs-1 fw-light">Tout les animes !</h1>
     </div>
     <div class="col-6 d-flex align-items-end flex-column">
-        {{form_start(form)}}
+        {{form_start(form, {'attr': {'class': 'rounded-pill border'}})}}
               <div class="btn-group" role="group">
                 <div>
-                    {{form_widget(form.animeName)}}
+                    {{form_widget(form.animeName, {'attr': {'class': 'border-0 rounded-pill shadow-none'}})}}
                 </div>
-                 <button type="submit" class="btn btn-secondary">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-search" viewBox="0 0 auto auto">
+                 <button type="submit" class="btn shadow-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 auto auto">
                         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
                     </svg>
                 </button>
             </div>
         {{form_end(form)}}
+    </div>
+</div>
+<div class="px-5">
+    <button class="btn btn-dark mb-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-filter" viewBox="0 1 16 16">
+            <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
+        </svg>
+        Filtrer
+    </button>
+    <div class="collapse" id="collapseExample">
+        <div class="row">
+            {{form_start(form2)}}
+                {{form_widget(form2.day, {'attr': {'class': 'goodWidth', 'placeholder' : 'fefe'}})}}
+
+                <button type="submit" class="btn btn-outline-secondary shadow-none">Chercher</button>
+            {{form_end(form2)}}
+        </div>
     </div>
 </div>
 <div class="text-center row m-0">
@@ -29,7 +51,7 @@
                             <h5 class="card-title">
                                 <a class="text-decoration-none" href="{{ path('oneAnime', {id: anime.id}) }}" >{{anime.aniName}}</a>
                             </h5>
-                            <p class="card-text">{{anime.aniHour|date('H:i')}}<br>épisode {{anime.aniCurrentNB}}/{{anime.aniFullNB}}</p>
+                            <p class="card-text">Heure : {{anime.aniHour|date('H:i')}}<br>Jour de sortie : {{anime.day.dayName}}<br>épisode {{anime.aniCurrentNB}}/{{anime.aniFullNB}}<br></p>
                         </div>
                     </div>
                 {% endfor %}
@@ -43,4 +65,13 @@
 <div class="navigation d-flex justify-content-center mt-3">
     {{ knp_pagination_render(allAnimes) }}
 </div>
+{% endblock %}
+
+
+{% block javascripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+<script>
+    $('select').select2();
+</script>
 {% endblock %}

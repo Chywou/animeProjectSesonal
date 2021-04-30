@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Anime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Validator\Constraints\Length;
 
 /**
  * @method Anime|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,12 +20,23 @@ class AnimeRepository extends ServiceEntityRepository
         parent::__construct($registry, Anime::class);
     }
 
-    public function findAllSearch($search)
+    public function findAllSearch($search, $filter)
     {
         $query = $this->createQueryBuilder('a')
-            ->where('a.aniName LIKE :search')
+            ->addSelect('d')
+            ->innerJoin('a.day', 'd')
+            ->andWhere('a.aniName LIKE :search')
             ->setParameter('search', '%'.$search.'%')
         ;
+        if(count($filter) > 0){
+            $query = $query
+                ->andWhere('d.id IN (:filter)')
+                ->setParameter('filter', $filter);
+        }
+
+        $query = $query
+        ->orderBy('a.id', 'ASC');
+
         return $query->getQuery()
                     ->getResult();
     }
